@@ -18,6 +18,7 @@ import {
     ACameraControlsPlugin,
 
     addBasePlugins,
+    AssetManagerLoadingBarPlugin,
     ITexture, TweakpaneUiPlugin, AssetManagerBasicPopupPlugin, CanvasSnipperPlugin,
 
     IViewerPlugin, FileTransferPlugin,
@@ -37,7 +38,10 @@ import {
   SwitchNodePlugin,
   SSGIPlugin,
   CameraUiPlugin,
-  AssetExporterPlugin
+  AssetExporterPlugin,
+  SimpleViewerUi,
+  ThinFilmLayerPlugin,
+  Vector3
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
@@ -52,7 +56,7 @@ async function setupViewer(){
     })
 
 
-    viewer.scene.activeCamera.userData.minNearPlane = 0.2;
+    //viewer.scene.activeCamera.userData.minNearPlane = 0.2;
 
     
 
@@ -99,10 +103,11 @@ async function setupViewer(){
     await viewer.addPlugin(SwitchNodePlugin)
     await viewer.addPlugin(SSGIPlugin)
     await viewer.addPlugin(TemporalAAPlugin)
-    await viewer.addPlugin(CameraUiPlugin)
+    //await viewer.addPlugin(CameraUiPlugin)
     await viewer.addPlugin(AssetExporterPlugin)
+    await viewer.addPlugin(ThinFilmLayerPlugin)
    
-
+   
 
     // Import and add a GLB file.
     await viewer.load("")
@@ -115,9 +120,13 @@ async function setupViewer(){
     // Add some UI for tweak and testing.
     const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
     // Add plugins to the UI to see their settings.
-    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, HierarchyUiPlugin, DropzonePlugin, CameraUiPlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
+    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, HierarchyUiPlugin, DropzonePlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, ThinFilmLayerPlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
 
     viewer.renderer.refreshPipeline()
+
+    const controls = viewer.scene.activeCamera.controls;
+    controls.minDistance = 5;
+    controls.maxDistance = 15;
 
 
 
