@@ -41,7 +41,8 @@ import {
   AssetExporterPlugin,
   SimpleViewerUi,
   ThinFilmLayerPlugin,
-  Vector3
+  Vector3,
+  MeshStandardMaterial
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
@@ -115,6 +116,7 @@ async function setupViewer(){
 
    
 
+
     // Load an environment map if not set in the glb file
      await viewer.setEnvironmentMap("./assets/environment.hdr");
 
@@ -129,7 +131,7 @@ async function setupViewer(){
     controls.minDistance = 5;
     controls.maxDistance = 15;
 
-
+    viewer.getPlugin(GroundPlugin).enabled = false;
 
 }
 
