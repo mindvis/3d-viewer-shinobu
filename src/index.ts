@@ -103,9 +103,10 @@ async function setupViewer(){
     await viewer.addPlugin(SwitchNodePlugin)
     await viewer.addPlugin(SSGIPlugin)
     await viewer.addPlugin(TemporalAAPlugin)
-    //await viewer.addPlugin(CameraUiPlugin)
+    await viewer.addPlugin(CameraUiPlugin)
     await viewer.addPlugin(AssetExporterPlugin)
     await viewer.addPlugin(ThinFilmLayerPlugin)
+    await viewer.addPlugin(CameraViewPlugin)
    
    
 
@@ -120,7 +121,7 @@ async function setupViewer(){
     // Add some UI for tweak and testing.
     const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
     // Add plugins to the UI to see their settings.
-    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, HierarchyUiPlugin, DropzonePlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, ThinFilmLayerPlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
+    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, HierarchyUiPlugin, DropzonePlugin, CameraUiPlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, ThinFilmLayerPlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
 
     viewer.renderer.refreshPipeline()
 
