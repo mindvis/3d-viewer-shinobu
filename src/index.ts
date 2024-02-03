@@ -15,11 +15,28 @@ import {
     TemporalAAPlugin,
     AnisotropyPlugin,
     GammaCorrectionPlugin,
+    ACameraControlsPlugin,
 
     addBasePlugins,
     ITexture, TweakpaneUiPlugin, AssetManagerBasicPopupPlugin, CanvasSnipperPlugin,
 
     IViewerPlugin, FileTransferPlugin,
+    addEditorPlugins,
+    CoreEditorApp,
+    PresetLibraryPlugin,
+  defaultPresets,
+  CameraViewPlugin,
+  DropzonePlugin,
+  PickingPlugin,
+  CanvasRecorderPlugin,
+  PopmotionPlugin,
+  LightsUiPlugin,
+  HierarchyUiPlugin,
+  ExtrasUiPlugin,
+  MaterialConfiguratorPlugin,
+  SwitchNodePlugin,
+  SSGIPlugin,
+  CameraUiPlugin
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
@@ -29,24 +46,34 @@ import "./styles.css";
 async function setupViewer(){
 
     // Initialize the viewer
-    const viewer = new ViewerApp({
+    const viewer = new CoreEditorApp({
         canvas: document.getElementById('webgi-canvas') as HTMLCanvasElement,
     })
 
+
+    viewer.scene.activeCamera.userData.minNearPlane = 0.2;
+
+    
+
+    console.log(defaultPresets);
+
     // Add plugins individually.
     // await viewer.addPlugin(GBufferPlugin)
-    // await viewer.addPlugin(new ProgressivePlugin(32))
-    // await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm))
-    // await viewer.addPlugin(GammaCorrectionPlugin)
-    // await viewer.addPlugin(SSRPlugin)
-    // await viewer.addPlugin(SSAOPlugin)
-    // await viewer.addPlugin(DiamondPlugin)
-    // await viewer.addPlugin(FrameFadePlugin)
-    // await viewer.addPlugin(GLTFAnimationPlugin)
-    // await viewer.addPlugin(GroundPlugin)
+     await viewer.addPlugin(new ProgressivePlugin(32))
+   //  await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm))
+   //await viewer.addPlugin(GammaCorrectionPlugin)
+     await viewer.addPlugin(SSRPlugin)
+     await viewer.addPlugin(SSAOPlugin)
+     await viewer.addPlugin(DiamondPlugin)
+    //await viewer.addPlugin(FrameFadePlugin)
+     await viewer.addPlugin(GLTFAnimationPlugin)
+       await viewer.addPlugin(GroundPlugin)
     // await viewer.addPlugin(BloomPlugin)
     // await viewer.addPlugin(TemporalAAPlugin)
-    // await viewer.addPlugin(AnisotropyPlugin)
+     await viewer.addPlugin(AnisotropyPlugin)
+     await viewer.addPlugin(AssetManagerPlugin)
+     await viewer.addPlugin(CameraViewPlugin)
+     await viewer.addPlugin(DropzonePlugin)
     // and many more...
 
     // or use this to add all main ones at once.
@@ -61,16 +88,35 @@ async function setupViewer(){
     // Add more plugins not available in base, like CanvasSnipperPlugin which has helpers to download an image of the canvas.
     await viewer.addPlugin(CanvasSnipperPlugin)
 
+    await viewer.addPlugin(PickingPlugin)
+    await viewer.addPlugin(CanvasRecorderPlugin)
+    await viewer.addPlugin(PopmotionPlugin)
+    await viewer.addPlugin(LightsUiPlugin)
+    await viewer.addPlugin(HierarchyUiPlugin)
+    await viewer.addPlugin(ExtrasUiPlugin)
+    await viewer.addPlugin(MaterialConfiguratorPlugin)
+    await viewer.addPlugin(SwitchNodePlugin)
+    await viewer.addPlugin(SSGIPlugin)
+    await viewer.addPlugin(TemporalAAPlugin)
+    await viewer.addPlugin(CameraUiPlugin)
+
+
     // Import and add a GLB file.
-    await viewer.load("./assets/classic-watch.glb")
+    await viewer.load("")
+
+   
 
     // Load an environment map if not set in the glb file
-    // await viewer.setEnvironmentMap("./assets/environment.hdr");
+     await viewer.setEnvironmentMap("./assets/environment.hdr");
 
     // Add some UI for tweak and testing.
     const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
     // Add plugins to the UI to see their settings.
-    uiPlugin.setupPlugins<IViewerPlugin>(TonemapPlugin, CanvasSnipperPlugin)
+    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, HierarchyUiPlugin, DropzonePlugin, CameraUiPlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
+
+    viewer.renderer.refreshPipeline()
+
+
 
 }
 
