@@ -47,7 +47,8 @@ import {
   Mesh,
   Box3,
   Light,
-  SimpleBackgroundEnvUiPlugin
+  SimpleBackgroundEnvUiPlugin,
+  ProgressiveShadow
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
@@ -114,8 +115,9 @@ async function setupViewer(){
     await viewer.addPlugin(ThinFilmLayerPlugin)
     await viewer.addPlugin(CameraViewPlugin)
     await viewer.addPlugin(SimpleBackgroundEnvUiPlugin)
+    
    
-   
+   // await viewer.setupUi();
 
     // Import and add a GLB file.
     await viewer.load("")
