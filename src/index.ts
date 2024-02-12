@@ -48,7 +48,8 @@ import {
   Box3,
   Light,
   SimpleBackgroundEnvUiPlugin,
-  ProgressiveShadow
+  ProgressiveShadow,
+  ARPlugin
 
     // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
@@ -115,7 +116,7 @@ async function setupViewer(){
     await viewer.addPlugin(ThinFilmLayerPlugin)
     await viewer.addPlugin(CameraViewPlugin)
     await viewer.addPlugin(SimpleBackgroundEnvUiPlugin)
-    
+    await viewer.addPlugin(ARPlugin)
    
    // await viewer.setupUi();
 
@@ -126,7 +127,8 @@ async function setupViewer(){
 
    viewer.getPlugin(GroundPlugin).enabled = false;
 
-  
+
+
 
     // Load an environment map if not set in the glb file
      await viewer.setEnvironmentMap("./assets/environment.hdr");
@@ -134,7 +136,7 @@ async function setupViewer(){
     // Add some UI for tweak and testing.
     const uiPlugin = await viewer.addPlugin(TweakpaneUiPlugin)
     // Add plugins to the UI to see their settings.
-    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, SimpleBackgroundEnvUiPlugin, HierarchyUiPlugin, DropzonePlugin, CameraUiPlugin, TonemapPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, ThinFilmLayerPlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
+    uiPlugin.setupPlugins<IViewerPlugin>(AssetManagerPlugin, SimpleBackgroundEnvUiPlugin, HierarchyUiPlugin, DropzonePlugin, CameraUiPlugin, TonemapPlugin, ARPlugin, LightsUiPlugin, CameraViewPlugin, ProgressivePlugin, ThinFilmLayerPlugin, SSAOPlugin, GroundPlugin, CanvasSnipperPlugin, AssetExporterPlugin, CanvasRecorderPlugin, PopmotionPlugin, TemporalAAPlugin, SSGIPlugin, SSRPlugin, DiamondPlugin, PickingPlugin, GLTFAnimationPlugin, SwitchNodePlugin, MaterialConfiguratorPlugin, ExtrasUiPlugin, AnisotropyPlugin)
 
     viewer.renderer.refreshPipeline()
 
