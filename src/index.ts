@@ -143,8 +143,15 @@ async function setupViewer(){
     const controls = viewer.scene.activeCamera.controls;
     controls.minDistance = 5;
     controls.maxDistance = 15;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.2;
 
-    
+
+
+
+    const options = viewer.scene.activeCamera.getCameraOptions();
+    options.fov = 20;
+    viewer.scene.activeCamera.setCameraOptions(options);
 
 }
 
