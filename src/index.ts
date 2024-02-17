@@ -49,9 +49,9 @@ import {
   Light,
   SimpleBackgroundEnvUiPlugin,
   ProgressiveShadow,
-  ARPlugin
-
-    // Color, // Import THREE.js internals
+  ARPlugin,
+ LoadingScreenPlugin
+  // Color, // Import THREE.js internals
     // Texture, // Import THREE.js internals
 } from "webgi";
 import "./styles.css";
@@ -73,7 +73,7 @@ async function setupViewer(){
     // Add plugins individually.
     // await viewer.addPlugin(GBufferPlugin)
      await viewer.addPlugin(new ProgressivePlugin(32))
-   //  await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm))
+  //   await viewer.addPlugin(new TonemapPlugin(!viewer.useRgbm))
    //await viewer.addPlugin(GammaCorrectionPlugin)
      await viewer.addPlugin(SSRPlugin)
      await viewer.addPlugin(SSAOPlugin)
@@ -91,6 +91,8 @@ async function setupViewer(){
 
     // or use this to add all main ones at once.
     await addBasePlugins(viewer) // check the source: https://codepen.io/repalash/pen/JjLxGmy for the list of plugins added.
+
+
 
     // Add a popup(in HTML) with download progress when any asset is downloading.
     await viewer.addPlugin(AssetManagerBasicPopupPlugin)
@@ -116,16 +118,17 @@ async function setupViewer(){
     await viewer.addPlugin(ThinFilmLayerPlugin)
     await viewer.addPlugin(CameraViewPlugin)
     await viewer.addPlugin(SimpleBackgroundEnvUiPlugin)
-    await viewer.addPlugin(ARPlugin)
+    //await viewer.addPlugin(ARPlugin)
+   // await viewer.addPlugin(GBufferPlugin)
    
    // await viewer.setupUi();
 
-    // Import and add a GLB file.
+       // Import and add a GLB file.
     await viewer.load("")
 
   
-
    viewer.getPlugin(GroundPlugin).enabled = false;
+   viewer.getPlugin(PickingPlugin).enabled = true;
 
 
 
@@ -145,13 +148,16 @@ async function setupViewer(){
     controls.maxDistance = 15;
     controls.enableDamping = true;
     controls.dampingFactor = 0.2;
-
-
-
+    controls.rotateSpeed = 1;
 
     const options = viewer.scene.activeCamera.getCameraOptions();
     options.fov = 20;
     viewer.scene.activeCamera.setCameraOptions(options);
+
+   
+
+    const tonemap = viewer.getPlugin(TonemapPlugin);
+    tonemap.tonemapBackground = true;
 
 }
 
